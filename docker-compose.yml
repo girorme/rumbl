@@ -1,0 +1,19 @@
+version: "3.4"
+volumes:
+ pprog-rumbl:
+services:
+ postgres:
+   container_name: pprog-rumbl
+   image: postgres:12.0-alpine
+   restart: always
+   environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+   ports:
+     - "5432:5432"
+   volumes:
+     - pprog-rumbl:/var/lib/postgresql/data
+   logging:
+     options:
+       max-file: "5"
+       max-size: "10m"
