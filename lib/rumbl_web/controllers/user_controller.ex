@@ -29,4 +29,15 @@ defmodule RumblWeb.UserController do
     user = Accounts.get_user(id)
     render(conn, "show.html", user: user)
   end
+
+  def delete(conn, %{"id" => id}) do
+    case Accounts.delete_user(id) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:warn, "User #{user.name} deleted")
+        |> redirect(to: Routes.user_path(conn, :index))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "index.html", changeset: changeset)
+    end
+  end
 end
