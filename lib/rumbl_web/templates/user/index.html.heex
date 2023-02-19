@@ -1,4 +1,4 @@
-<h1>Listing users</h1>
+<h1>Listing users - <span><%= link "New", to: Routes.user_path(@conn, :new) %></span></h1>
 
 <table>
     <%= for user <- @users do %>

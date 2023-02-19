@@ -36,4 +36,14 @@ defmodule Rumbl.Accounts do
     |> validate_required([:name, :username])
     |> validate_length(:username, min: 1, max: 20)
   end
+
+  def change_registration(%User{} = user, params) do
+    User.registration_chageset(user, params)
+  end
+
+  def register_user(attrs \\ %{}) do
+    %User{}
+    |> User.registration_chageset(attrs)
+    |> Repo.insert()
+  end
 end
