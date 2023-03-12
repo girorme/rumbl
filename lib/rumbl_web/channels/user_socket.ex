@@ -7,13 +7,14 @@ defmodule RumblWeb.UserSocket do
 
   def connect(%{"token" => token}, socket, _connect_info) do
     case Phoenix.Token.verify(
-      socket,
-      "user socket",
-      token,
-      max_age: @max_age
-    ) do
+           socket,
+           "user socket",
+           token,
+           max_age: @max_age
+         ) do
       {:ok, user_id} ->
         {:ok, assign(socket, :user_id, user_id)}
+
       {:error, _reason} ->
         :error
     end
